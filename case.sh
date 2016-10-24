@@ -1,33 +1,73 @@
 #!/bin/bash
+#
+# Exemplo de uso do comando "case"
+# Exemplo de como um script deve ser documentado
+#
+# Escrito por Diego Tumelero para a disciplina de Shell Script
 
-clear
 
-Menu(){
 
-   echo "------------------------------------------"
-   echo "                LinuxAdmin                "
-   echo "------------------------------------------"
-   echo
-   echo "[ 1 ] Opção 1"
-   echo "[ 2 ] Alternativa 2"
-   echo "[ 3 ] Sair"
-   echo
+principal() {			# Função principal do programa
+	clear				# limpa a tela
 
-   echo -n "Qual a opcao desejada ? "
-   read opcao
+	echo "[1] Laranja"	# imprime na tela as opções que serão
+	echo "[2] Martelo"	# abordadas no comando case
+	echo "[3] Sair"
+	echo
+	echo -n "Qual a opcao desejada ? "
+	read opcao			# faz a leitura da variável "opcao", 
+						# que será utilizada no comando case
+						# para indicar qual a opção a ser utilizada
 
-   case $opcao in
-      1) opcao1 ;;
-      2) alternativa2 ;;
-      5) exit ;;
-      *) "Opcao desconhecida." ; echo ; Principal ;;
-   esac
+						# caso o valor da variável "opcao"...
+	case $opcao in
+		1)				# seja igual a "1", então faça as instruções abaixo
+			clear
+			laranja 	# executa os comandos da função "laranja"
+
+			;;			# os 2 ";;" (ponto e virgula)
+						# significam que chegou ao final
+						# esta opção do comando case
+		2)
+			clear
+			martelo ;;	# usa a função martelo e finaliza a opção do case com ";;"
+		3)
+			clear
+			exit ;;
+		*)				# esta opçao existe para caso o usuário digite um 
+						# valor diferente de 1, 2 ou 3
+			clear
+			echo "Opcao desconhecida."
+			read pause
+			principal  	# volta para o menu inicial
+			;;
+	esac
 }
 
-opcao1() {
-	echo "opção 1"
+laranja() {				# função da opção laranja
+	echo "Laranja"
+	read pause			# usado para pausar a execução do script
+	principal			# volta para a função principal
 }
 
-alternativa2() {
-	echo "alternativa 2"
+martelo() {				# função da opção martelo
+	clear
+	echo "Martelo"
+	read pause
+	principal
 }
+
+opcao_invalida() {		# função da opção inválida
+	clear
+	echo "Opcao desconhecida."
+	read pause
+	principal
+}
+
+principal				# o script começa aqui, as funções das linhas anteriores
+						# são lidas pelo interpretador bash e armazenadas em memória.
+
+						# o bash não tem como adivinhar qual das funções ele deve 
+						# executar, por isto o a execução do script realmente começa
+						# quando aparece uma instrução fora de uma função, neste caso,
+						# chamando a função principal
