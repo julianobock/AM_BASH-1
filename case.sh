@@ -36,11 +36,7 @@ principal() {           # Função principal do programa
             exit ;;
         *)              # esta opçao existe para caso o usuário digite um 
                         # valor diferente de 1, 2 ou 3
-            clear
-            echo "Opcao desconhecida."
-            read pause
-            principal   # volta para o menu inicial
-            ;;
+            opcao_invalida ;;
     esac
 }
 
