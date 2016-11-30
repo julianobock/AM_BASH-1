@@ -41,9 +41,35 @@ principal() {           # Função principal do programa
 }
 
 laranja() {             # função da opção laranja
-    echo "Laranja"
+	echo "Você escolheu laranja"
+	echo ""
+	echo "[1] suco"
+	echo "[2] bolo"
+	echo "[3] voltar ao menu principal"
+
+	echo -n "Qual a opcao desejada ? "
+	read laranja_op
+
+    case $laranja_op in
+        1)       
+            clear
+            echo "suco de laranja"
+            ;;  
+        2)
+            clear
+            echo "bolo de laranja"
+            ;;
+        3)
+            clear
+            principal
+            ;;
+        *)              # esta opçao existe para caso o usuário digite um 
+                        # valor diferente de 1, 2 ou 3
+            opcao_invalida ;;
+    esac
+
     read pause          # usado para pausar a execução do script
-    principal           # volta para a função principal
+    laranja
 }
 
 martelo() {             # função da opção martelo
